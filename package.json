@@ -1,0 +1,23 @@
+{
+  "name": "werkdagen",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node app.js",
+    "start:local": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@joi/date": "^2.1.0",
+    "date-easter": "^1.0.2",
+    "express": "^4.18.2",
+    "joi": "^17.8.3",
+    "lodash": "^4.17.21",
+    "luxon": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
