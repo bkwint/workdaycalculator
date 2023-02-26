@@ -1,24 +1,24 @@
-const express = require('express');
+import express from 'express';
 
-// Joi validation schema's
-const { 
+// // Joi validation schema's
+import { 
   validateGetConfigRequest, 
   validatePutConfigRequest, 
   validateAddWorkdaysRequest, 
   validateIsWorkdayRequest 
-} = require('./src/validation');
+} from './validation/validators.js';
 
 // business logic classes
-const Workdays = require('./src/Workdays');
-const Config = require('./src/Config');
-const Cache = require('./src/Cache');
+import Workdays from './Workdays.js';
+import DiskCache from './DiskCache.js';
+import Config from './Config.js';
 
 // create the express application
 const app = express();
 app.use(express.json());
 
 // Setup the application
-const cache = new Cache();
+const cache = new DiskCache();
 const workdays = new Workdays(cache);
 const config = new Config(cache, workdays);
 
@@ -59,7 +59,7 @@ app.listen(8181, () => {
 });
 
 // we log the total memory used every minute such that we can monitor the memory usage
-const formatMemoryUsage = (data) => `${Math.round(data / 1024 / 1024 * 100) / 100} MB`;
+const formatMemoryUsage = (data: any) => `${Math.round(data / 1024 / 1024 * 100) / 100} MB`;
 setInterval(() => {
   console.log(formatMemoryUsage(process.memoryUsage().heapTotal));
 }, 60000);

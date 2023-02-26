@@ -1,15 +1,22 @@
-const path = require('path');
-const fs = require('fs');
-const generate = require('./lib/generate');
+import path from 'path';
+import fs from 'fs';
+import DiskCache from "./DiskCache";
+import Workdays from "./Workdays";
+
+import generate from './lib/generate.js';
 
 class Config {
-  constructor(cache, workdays, baseDir = './.config') {
+  private baseDir: string;
+  private workdays: Workdays;
+  private cache: DiskCache;
+
+  constructor(cache: DiskCache, workdays: Workdays, baseDir = './.config') {
     this.baseDir = baseDir;
     this.workdays = workdays;
     this.cache = cache;
   }
 
-  get(ref) {
+  public get(ref: string): any {
     const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
 
     // make sure we can only read from the given path
@@ -18,7 +25,7 @@ class Config {
     return JSON.parse(fs.readFileSync(jsonPath).toString());
   }
 
-  write(ref, config) {
+  public write(ref: string, config: any): void {
     const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
 
     // make sure we can only read from the given path
@@ -30,7 +37,7 @@ class Config {
     this.workdays.flush(ref);
   }
 
-  assertValidPath(path) {
+  private assertValidPath(path: string): void {
     if (path.length < this.baseDir.length) {
         throw Error('Invalid data requested');
     }
@@ -41,4 +48,4 @@ class Config {
   }
 };
 
-module.exports = Config;
+export default Config;

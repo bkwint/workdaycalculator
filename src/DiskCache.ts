@@ -1,12 +1,14 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-class Cache {
-  constructor(baseDir = './.cache') {
+class DiskCache {
+  private baseDir: string;
+
+  constructor(baseDir: string = './.cache') {
     this.baseDir = path.resolve(baseDir);
   }
 
-  get(ref) {
+  public get(ref: string): any {
     const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
 
     // make sure we can only read from the given path
@@ -17,7 +19,7 @@ class Cache {
     return json;
   }
 
-  write(ref, body) {
+  public write(ref: string, body: any): void {
     const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
 
     // make sure we can only read from the given path
@@ -26,15 +28,15 @@ class Cache {
     return fs.writeFileSync(jsonPath, JSON.stringify(body, null, 2));
   }
 
-  assertValidPath(path) {
+  private assertValidPath(path: string) {
     if (path.length < this.baseDir.length) {
         throw Error('Invalid data requested');
     }
 
-    if (path.substr(0, this.baseDir.length) !== this.baseDir) {
+    if (path.substring(0, this.baseDir.length) !== this.baseDir) {
         throw Error('Invalid data requested');
     }
   }
 }
 
-module.exports = Cache;
+export default DiskCache;

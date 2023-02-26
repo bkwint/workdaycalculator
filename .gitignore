@@ -1,3 +1,4 @@
 .cache/
 .config/
 node_modules/
+dist/

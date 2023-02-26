@@ -16,5 +16,4 @@ The application has 4 endpoints.
  - Transform the project to a typescript project for proper typing
  - Create a docker file
  - Modify the generator code such that you can define which holidays you want to include
- - Create an endpoint to fetch all national holidays for a specific country/state
- - Add states to the parameter set for the holidays
+ - Create an endpoint to fetch all national holidays for a specific zone
