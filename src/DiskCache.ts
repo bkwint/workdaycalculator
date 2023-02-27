@@ -1,12 +1,11 @@
 import fs from 'fs';
 import CacheInterface from 'interfaces/CacheInterface';
+import IOBase from 'IOBase';
 import path from 'path';
 
-class DiskCache {
-  private baseDir: string;
-
+class DiskCache extends IOBase {
   constructor(baseDir: string = './.cache') {
-    this.baseDir = path.resolve(baseDir);
+    super(baseDir);
   }
 
   public get(ref: string): CacheInterface {
@@ -27,16 +26,6 @@ class DiskCache {
     this.assertValidPath(jsonPath);
 
     return fs.writeFileSync(jsonPath, JSON.stringify(body, null, 2));
-  }
-
-  private assertValidPath(path: string) {
-    if (path.length < this.baseDir.length) {
-        throw Error('Invalid data requested');
-    }
-
-    if (path.substring(0, this.baseDir.length) !== this.baseDir) {
-        throw Error('Invalid data requested');
-    }
   }
 }
 

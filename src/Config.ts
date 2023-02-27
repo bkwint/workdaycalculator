@@ -5,14 +5,14 @@ import Workdays from "./Workdays";
 
 import generate from './lib/generate.js';
 import ConfigInterface from 'interfaces/ConfigInterface';
+import IOBase from 'IOBase';
 
-class Config {
-  private baseDir: string;
+class Config extends IOBase {
   private workdays: Workdays;
   private cache: DiskCache;
 
   constructor(cache: DiskCache, workdays: Workdays, baseDir = './.config') {
-    this.baseDir = path.resolve(baseDir);
+    super(baseDir);
     this.workdays = workdays;
     this.cache = cache;
   }
@@ -36,16 +36,6 @@ class Config {
 
     this.cache.write(ref, generate(config));
     this.workdays.flush(ref);
-  }
-
-  private assertValidPath(path: string): void {
-    if (path.length < this.baseDir.length) {
-        throw Error('Invalid data requested');
-    }
-
-    if (path.substring(0, this.baseDir.length) !== this.baseDir) {
-        throw Error('Invalid data requested');
-    }
   }
 };
 
