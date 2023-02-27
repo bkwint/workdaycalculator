@@ -11,7 +11,7 @@ class Config {
   private cache: DiskCache;
 
   constructor(cache: DiskCache, workdays: Workdays, baseDir = './.config') {
-    this.baseDir = baseDir;
+    this.baseDir = path.resolve(baseDir);
     this.workdays = workdays;
     this.cache = cache;
   }
@@ -42,7 +42,7 @@ class Config {
         throw Error('Invalid data requested');
     }
 
-    if (path.substr(0, this.baseDir.length) !== this.baseDir) {
+    if (path.substring(0, this.baseDir.length) !== this.baseDir) {
         throw Error('Invalid data requested');
     }
   }
