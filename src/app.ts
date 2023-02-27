@@ -23,25 +23,25 @@ const workdays = new Workdays(cache);
 const config = new Config(cache, workdays);
 
 // define all the endpoints
-app.get('/v1/:ref/isWorkday/:date', async (req, res) => {
+app.get('/v1/:ref/isWorkday/:date', async (req, res): Promise<void> => {
   const { ref, date } = await validateIsWorkdayRequest(req.params);
   
   res.json(workdays.isWorkday(ref, date));
 });
 
-app.get('/v1/:ref/addWorkdays/:date/:add', async (req, res) => {
+app.get('/v1/:ref/addWorkdays/:date/:add', async (req, res): Promise<void> => {
   const { ref, date, add } = await validateAddWorkdaysRequest(req.params);
   
   res.json(workdays.getWorkday(ref, date, add));
 });
 
-app.get('/v1/:ref/config', async (req, res) => {
+app.get('/v1/:ref/config', async (req, res): Promise<void> => {
   const { ref } = await validateGetConfigRequest(req.params);
 
   res.json(config.get(ref));
 });
 
-app.put('/v1/:ref/config', async (req, res) => {
+app.put('/v1/:ref/config', async (req, res): Promise<void> => {
   const { ref, body } = await validatePutConfigRequest({
     ref: req.params?.ref,
     body: req.body
@@ -54,12 +54,6 @@ app.put('/v1/:ref/config', async (req, res) => {
 });
 
 // start the application
-app.listen(8181, () => {
+app.listen(8181, (): void => {
   console.log('listening for requests');
 });
-
-// we log the total memory used every minute such that we can monitor the memory usage
-const formatMemoryUsage = (data: any) => `${Math.round(data / 1024 / 1024 * 100) / 100} MB`;
-setInterval(() => {
-  console.log(formatMemoryUsage(process.memoryUsage().heapTotal));
-}, 60000);

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import CacheInterface from 'interfaces/CacheInterface';
 import path from 'path';
 
 class DiskCache {
@@ -8,7 +9,7 @@ class DiskCache {
     this.baseDir = path.resolve(baseDir);
   }
 
-  public get(ref: string): any {
+  public get(ref: string): CacheInterface {
     const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
 
     // make sure we can only read from the given path
@@ -19,7 +20,7 @@ class DiskCache {
     return json;
   }
 
-  public write(ref: string, body: any): void {
+  public write(ref: string, body: CacheInterface): void {
     const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
 
     // make sure we can only read from the given path

@@ -4,6 +4,7 @@ import DiskCache from "./DiskCache";
 import Workdays from "./Workdays";
 
 import generate from './lib/generate.js';
+import ConfigInterface from 'interfaces/ConfigInterface';
 
 class Config {
   private baseDir: string;
@@ -16,7 +17,7 @@ class Config {
     this.cache = cache;
   }
 
-  public get(ref: string): any {
+  public get(ref: string): ConfigInterface {
     const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
 
     // make sure we can only read from the given path
@@ -25,7 +26,7 @@ class Config {
     return JSON.parse(fs.readFileSync(jsonPath).toString());
   }
 
-  public write(ref: string, config: any): void {
+  public write(ref: string, config: ConfigInterface): void {
     const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
 
     // make sure we can only read from the given path
@@ -33,7 +34,7 @@ class Config {
 
     fs.writeFileSync(jsonPath, JSON.stringify(config, null, 2));
 
-    this.cache.write(ref, generate(config, ref));
+    this.cache.write(ref, generate(config));
     this.workdays.flush(ref);
   }
 

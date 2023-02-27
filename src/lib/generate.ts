@@ -2,9 +2,10 @@ import { easter } from 'date-easter';
 import { DateTime } from 'luxon';
 import flattenDeep from 'lodash/flattenDeep.js';
 
-import Config from "../Config";
+import ConfigInterface from 'interfaces/ConfigInterface';
+import CacheInterface from 'interfaces/CacheInterface';
 
-const getHolidays = (year: number, zone: string):string[] => {
+const getHolidays = (year: number, zone: string): string[] => {
   const easterDate = DateTime.fromISO(easter(year).toString());
 
   switch (zone) {
@@ -37,18 +38,11 @@ const getHolidays = (year: number, zone: string):string[] => {
   }
 }
 
-interface WorkDaysInterface {
-  dayToIndex: any,
-  days: string[],
-};
-
-const generate = (config: Config, ref: string) => {
-  const _config = config.get(ref);
-
+const generate = (config: ConfigInterface): CacheInterface => {
   let now = DateTime.now().startOf('day');
-  const endDate = DateTime.fromISO(_config.maxDate);
+  const endDate = DateTime.fromISO(`${DateTime.now().year + config.numberOfYears}-12-31`);
 
-  const workdays: WorkDaysInterface = {
+  const workdays: CacheInterface = {
     dayToIndex: {},
     days: [],
   };
@@ -58,7 +52,7 @@ const generate = (config: Config, ref: string) => {
   const endYear = endDate.year;
   const holidaysPerYear = [];
   for (let i = startYear; i < endYear; i += 1) {
-    holidaysPerYear.push(getHolidays(i, _config.zone));
+    holidaysPerYear.push(getHolidays(i, config.zone));
   }
 
   const holidays = flattenDeep(holidaysPerYear);
@@ -70,8 +64,8 @@ const generate = (config: Config, ref: string) => {
     // determin the day and the string representation of the date
     if (
       !holidays.includes(now.toISODate()) && // if is no holiday
-      _config.workdays.includes(now.weekday) && // and it is a workday of the week
-      !_config.exclude.includes(now.toISODate()) // and it is not a special close day
+      config.workdays.includes(now.weekday) && // and it is a workday of the week
+      !config.exclude.includes(now.toISODate()) // and it is not a special close day
     ) {
       workdays.days.push(now.toISODate());
       i += 1;

@@ -27,7 +27,7 @@ class Workdays {
    * 
    * @param ref string
    */
-  private lazyLoadConfig(ref: string): any {
+  private lazyLoadConfig(ref: string): void {
     if (!this?.configs[this.getKey(ref)]) {
       this.configs[this.getKey(ref)] = this.cache.get(ref);
     }

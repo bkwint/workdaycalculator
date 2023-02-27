@@ -1,13 +1,8 @@
-interface PutConfigRequestBody {
-    zone: string,
-    workdays: number[],
-    maxDate: Date,
-    exclude: Date[]
-};
+import ConfigInterface from "interfaces/ConfigInterface";
 
 interface PutConfigValidationResultInterface {
   ref: string,
-  body: PutConfigRequestBody
+  body: ConfigInterface
 };
 
 export default PutConfigValidationResultInterface;
