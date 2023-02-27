@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import DiskCache from "./DiskCache";
+import DiskCache from "./DiskCache.js";
 
 class Workdays {
   private configs:any;

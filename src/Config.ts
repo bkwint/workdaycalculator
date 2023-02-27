@@ -1,11 +1,11 @@
 import path from 'path';
 import fs from 'fs';
-import DiskCache from "./DiskCache";
-import Workdays from "./Workdays";
+import DiskCache from "./DiskCache.js";
+import Workdays from "./Workdays.js";
 
 import generate from './lib/generate.js';
-import ConfigInterface from 'interfaces/ConfigInterface';
-import IOBase from 'IOBase';
+import ConfigInterface from './interfaces/ConfigInterface.js';
+import IOBase from './IOBase.js';
 
 class Config extends IOBase {
   private workdays: Workdays;

@@ -1,6 +1,6 @@
 import fs from 'fs';
-import CacheInterface from 'interfaces/CacheInterface';
-import IOBase from 'IOBase';
+import CacheInterface from './interfaces/CacheInterface.js';
+import IOBase from './IOBase.js';
 import path from 'path';
 
 class DiskCache extends IOBase {
