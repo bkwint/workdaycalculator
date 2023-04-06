@@ -1,7 +1,7 @@
 import fs from 'fs';
+import path from 'path';
 import CacheInterface from './interfaces/CacheInterface.js';
 import IOBase from './IOBase.js';
-import path from 'path';
 
 class DiskCache extends IOBase {
   constructor(baseDir: string = './.cache') {

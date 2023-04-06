@@ -7,13 +7,13 @@ class IOBase {
     this.baseDir = path.resolve(baseDir);
   }
 
-  protected assertValidPath(path: string) {
-    if (path.length < this.baseDir.length) {
-        throw Error('Invalid data requested');
+  protected assertValidPath(pathToCheck: string) {
+    if (pathToCheck.length < this.baseDir.length) {
+      throw Error('Invalid data requested');
     }
 
-    if (path.substring(0, this.baseDir.length) !== this.baseDir) {
-        throw Error('Invalid data requested');
+    if (pathToCheck.substring(0, this.baseDir.length) !== this.baseDir) {
+      throw Error('Invalid data requested');
     }
   }
 }

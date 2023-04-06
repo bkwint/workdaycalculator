@@ -1,6 +1,6 @@
 import { easter } from 'date-easter';
 import { DateTime } from 'luxon';
-import flattenDeep from 'lodash/flattenDeep.js';
+import flattenDeep from 'lodash/flattenDeep';
 
 import ConfigInterface from 'interfaces/ConfigInterface';
 import CacheInterface from 'interfaces/CacheInterface';
@@ -11,32 +11,32 @@ const getHolidays = (year: number, zone: string): string[] => {
   switch (zone) {
     case 'nl':
       return [
-        `${year}-01-01`,                    // nieuwjaar
-        easterDate.toISODate(),                  // eerste paas dag
-        easterDate.plus({ days: 1}).toISODate(), // tweede paas dag
-        `${year}-04-27`,                    // koningsdag
-        easterDate.plus({days: 39}).toISODate(), // hemelvaartsdag
-        easterDate.plus({days: 49}).toISODate(), // 1ste pinksterdag
-        easterDate.plus({days: 50}).toISODate(), // 2de pinksterdag
-        `${year}-12-25`,                    // 1ste kerstdag
-        `${year}-12-26`,                    // 2de kerstdag
+        `${year}-01-01`, // nieuwjaar
+        easterDate.toISODate(), // eerste paas dag
+        easterDate.plus({ days: 1 }).toISODate(), // tweede paas dag
+        `${year}-04-27`, // koningsdag
+        easterDate.plus({ days: 39 }).toISODate(), // hemelvaartsdag
+        easterDate.plus({ days: 49 }).toISODate(), // 1ste pinksterdag
+        easterDate.plus({ days: 50 }).toISODate(), // 2de pinksterdag
+        `${year}-12-25`, // 1ste kerstdag
+        `${year}-12-26`, // 2de kerstdag
       ];
     case 'be':
       return [
-        `${year}-01-01`,                    // nieuwjaar
-        easterDate.plus({ days: 1}).toISODate(), // Paasmaandag
-        `${year}-05-01`,                    // Dag van de Arbeid
-        easterDate.plus({days: 39}).toISODate(), // O.H. Hemelvaart
-        easterDate.plus({days: 50}).toISODate(), // Pinkstermaandag
-        `${year}-07-21`,                    // Nationale feestdag
-        `${year}-08-15`,                    // O.L.V hemelvaart
-        `${year}-11-11`,                    // wapenstilstand
-        `${year}-12-25`,                    // 1ste kerstdag
+        `${year}-01-01`, // nieuwjaar
+        easterDate.plus({ days: 1 }).toISODate(), // Paasmaandag
+        `${year}-05-01`, // Dag van de Arbeid
+        easterDate.plus({ days: 39 }).toISODate(), // O.H. Hemelvaart
+        easterDate.plus({ days: 50 }).toISODate(), // Pinkstermaandag
+        `${year}-07-21`, // Nationale feestdag
+        `${year}-08-15`, // O.L.V hemelvaart
+        `${year}-11-11`, // wapenstilstand
+        `${year}-12-25`, // 1ste kerstdag
       ];
     default:
       return [];
   }
-}
+};
 
 const generate = (config: ConfigInterface): CacheInterface => {
   let now = DateTime.now().startOf('day');
@@ -60,12 +60,12 @@ const generate = (config: ConfigInterface): CacheInterface => {
   let i = 0;
   while (now < endDate) {
     workdays.dayToIndex[now.toISODate()] = i;
-        
+
     // determin the day and the string representation of the date
     if (
-      !holidays.includes(now.toISODate()) && // if is no holiday
-      config.workdays.includes(now.weekday) && // and it is a workday of the week
-      !config.exclude.includes(now.toISODate()) // and it is not a special close day
+      !holidays.includes(now.toISODate()) // if is no holiday
+      && config.workdays.includes(now.weekday) // and it is a workday of the week
+      && !config.exclude.includes(now.toISODate()) // and it is not a special close day
     ) {
       workdays.days.push(now.toISODate());
       i += 1;

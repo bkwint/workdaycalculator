@@ -3,6 +3,6 @@ interface ConfigInterface {
   workdays: number[]
   numberOfYears: number
   exclude: string[]
-};
+}
 
 export default ConfigInterface;
