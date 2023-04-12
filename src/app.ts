@@ -37,7 +37,7 @@ app.get('/v1/:ref/isWorkday/:date', async (req, res, next): Promise<void> => {
     const { ref, date } = await validateIsWorkdayRequest(req.params);
 
     res.json({
-      status: 1,
+      status: 'SUCCESS',
       result: workdays.isWorkday(ref, date)
     });
   } catch (e) {
@@ -50,7 +50,7 @@ app.get('/v1/:ref/addWorkdays/:date/:add', async (req, res, next): Promise<void>
     const { ref, date, add } = await validateAddWorkdaysRequest(req.params);
 
     res.json({
-      status: 1,
+      status: 'SUCCESS',
       result: workdays.getWorkday(ref, date, add)
     });
   } catch (e) {
@@ -63,7 +63,7 @@ app.get('/v1/:ref/config', async (req, res, next): Promise<void> => {
     const { ref } = await validateGetConfigRequest(req.params);
 
     res.json({
-      status: 1,
+      status: 'SUCCESS',
       result: config.get(ref)
     });
   } catch (e) {
@@ -82,7 +82,7 @@ app.put('/v1/:ref/config', async (req, res, next): Promise<void> => {
     config.write(ref, body);  
 
     res.json({
-      status: 1
+      status: 'SUCCESS',
     });
   } catch (e) {
     next(e);
@@ -103,14 +103,14 @@ app.get('/v1/holidays/:zone', async (req, res, next): Promise<void> => {
   }
 
   res.json({
-    status: 1,
+    status: 'SUCCESS',
     result: holidays
   });
 })
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({
-    status: 2,
+    status: 'FAILED',
     message: err.message
   });
 });

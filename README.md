@@ -20,7 +20,7 @@ Fetches the configuration for a specific reference
 Response:
 ```
 {
-    "status": 1,
+    "status": "SUCCESS",
     "result": {
         "zone": "nl",
         "numberOfYears": 1,
@@ -45,27 +45,24 @@ Writes the configuration on runtime and generates the cache file
 Body (JSON):
 ```
 {
-    "status": 1,
-    "result": {
-        "zone": "nl",
-        "numberOfYears": 1,
-        "workdays": [
-            1,
-            2,
-            3,
-            4,
-            5
-        ],
-        "exclude": [],
-        "excludeHolidays": []
-    }
+    "zone": "nl",
+    "numberOfYears": 1,
+    "workdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ],
+    "exclude": [],
+    "excludeHolidays": []
 }
 ```
 
 Response (JSON):
 ```
 {
-    "status": 1
+    "status": "SUCCESS",
 }
 ```
 
@@ -77,7 +74,7 @@ Fetches a list of holidays for a specific zone which can be added to the configu
 Response (JSON):
 ```
 {
-    "status": 1,
+    "status": "SUCCESS",
     "result": []
 }
 ```
@@ -90,7 +87,7 @@ Checks if the given date is a workday
 Response (JSON):
 ```
 {
-    "status": 1,
+    "status": "SUCCESS",
     "result": true
 }
 ```
@@ -103,7 +100,7 @@ Calculates the next workday based ont he given date and the number of days we sh
 Response (JSON):
 ```
 {
-    "status": 1,
+    "status": "SUCCESS",
     "result": "2023-12-27"
 }
 ```
