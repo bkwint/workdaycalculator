@@ -2,6 +2,7 @@ import fs from 'fs';
 import CacheInterface from './interfaces/CacheInterface.js';
 import IOBase from './IOBase.js';
 import path from 'path';
+import ConfigInterface from 'interfaces/ConfigInterface.js';
 
 class DiskCache extends IOBase {
   constructor(baseDir: string = './.cache') {
@@ -16,16 +17,30 @@ class DiskCache extends IOBase {
 
     const json = JSON.parse(fs.readFileSync(jsonPath).toString());
 
-    return json;
+    return json.cache;
   }
 
-  public write(ref: string, body: CacheInterface): void {
+  public getConfig(ref: string): ConfigInterface {
     const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
 
     // make sure we can only read from the given path
     this.assertValidPath(jsonPath);
 
-    return fs.writeFileSync(jsonPath, JSON.stringify(body, null, 2));
+    const json = JSON.parse(fs.readFileSync(jsonPath).toString());
+
+    return json.config;
+  }
+
+  public write(ref: string, body: CacheInterface, config: ConfigInterface): void {
+    const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
+
+    // make sure we can only read from the given path
+    this.assertValidPath(jsonPath);
+
+    return fs.writeFileSync(jsonPath, JSON.stringify({
+      config,
+      cache: body
+    }, null, 2));
   }
 }
 

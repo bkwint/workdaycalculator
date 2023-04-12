@@ -34,7 +34,7 @@ class Config extends IOBase {
 
     fs.writeFileSync(jsonPath, JSON.stringify(config, null, 2));
 
-    this.cache.write(ref, generate(config));
+    this.cache.write(ref, generate(config), config);
     this.workdays.flush(ref);
   }
 
@@ -47,7 +47,18 @@ class Config extends IOBase {
         .map((item) => item.substring(0, item.length - 5));
 
       for (const ref of refs) {
-        this.write(ref, this.get(ref));
+        const currentConfig = this.get(ref);
+
+        // try to get the old configuration to make a compare
+        let oldConfig = {};
+        try {
+          oldConfig = this.cache.getConfig(ref);
+        } catch (e) {}
+
+        // if there is a difference, we do a rollover of the cache
+        if (JSON.stringify(currentConfig) !== JSON.stringify(oldConfig)) {
+          this.write(ref, this.get(ref));
+        }
       }
     } catch (e) {
       return false;
