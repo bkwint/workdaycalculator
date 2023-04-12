@@ -7,6 +7,7 @@ Application that allows you to define a configuration for specific usecases for 
  - Write the unit tests
  - Proper errors should be thrown on different errors
  - Generate swagger documentation
+ - Regeneration of cache should always be done, but only if config changes
 
 # API documentation
 ## GetConfig
