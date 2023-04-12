@@ -6,6 +6,7 @@ Application that allows you to define a configuration for specific usecases for 
 # TODO
  - Write the unit tests
  - Proper errors should be thrown on different errors
+ - Generate swagger documentation
 
 # API documentation
 ## GetConfig
