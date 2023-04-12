@@ -9,10 +9,8 @@ The application has 4 endpoints.
  - putConfig (put the configuration for a specific ref)
  - isWorkday defines if the given date is a workday for a given ref
  - addWorkdays calculates the first workday after a specific number of days for a specific date
+ - getHolidays to fetch all the holidays for a given zone
 
 # TODO
- - Define a structured output
  - Write the unit tests
- - Create a docker file
- - Modify the generator code such that you can define which holidays you want to include
- - Create an endpoint to fetch all national holidays for a specific zone
+ - Allow for option to generate the .cache on startup for each x.json file that is present
