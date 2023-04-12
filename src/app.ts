@@ -26,6 +26,12 @@ const cache = new DiskCache();
 const workdays = new Workdays(cache);
 const config = new Config(cache, workdays);
 
+if (process.env.REGENERATE) {
+  // regenerates all the configs and puts then in memory
+  // and on disk
+  config.regenerateCache();
+}
+
 // define all the endpoints
 app.get('/v1/:ref/isWorkday/:date', async (req, res, next): Promise<void> => {
   try {

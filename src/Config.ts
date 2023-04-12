@@ -37,6 +37,24 @@ class Config extends IOBase {
     this.cache.write(ref, generate(config));
     this.workdays.flush(ref);
   }
+
+  public regenerateCache(): boolean {
+    // we need to read all the files in the cache dir and regenerate
+    // everything
+    try {
+      const refs = fs.readdirSync(path.resolve(this.baseDir))
+        .filter((item) => item.substring(item.length - 5, item.length) === '.json')
+        .map((item) => item.substring(0, item.length - 5));
+
+      for (const ref of refs) {
+        this.write(ref, this.get(ref));
+      }
+    } catch (e) {
+      return false;
+    }
+
+    return true;
+  }
 };
 
 export default Config;
