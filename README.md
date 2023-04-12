@@ -13,6 +13,7 @@ The application has 4 endpoints.
 
 # TODO
  - Write the unit tests
+ - Proper errors should be thrown on different errors
 
 # API documentation
 ## GetConfig
