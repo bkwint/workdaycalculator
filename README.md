@@ -100,3 +100,16 @@ Response (JSON):
     "result": "2023-12-27"
 }
 ```
+
+# Running in Docker
+To run the application in Docker with persistence take the following steps:
+```
+$ docker build -t workdaysapi .
+$ docker run -p 127.0.0.1:8181:8181 -v ${PWD}/.cache:/usr/src/app/.cache -v ${PWD}/.config:/usr/src/app/.cache workdaysapi 
+```
+
+To run the application such that it will always regenerate the cache from config at startup
+```
+$ docker build -t workdaysapi .
+$ docker run -p 127.0.0.1:8181:8181 -v ${PWD}/.cache:/usr/src/app/.cache -v ${PWD}/.config:/usr/src/app/.cache -e REGENERATE=1 workdaysapi 
+```
