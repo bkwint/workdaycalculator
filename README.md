@@ -13,11 +13,11 @@ On startup the application will try to find all the json configuration files fro
 
 # API documentation
 ## GetConfig
-```GET /v1/:ref/config```
+**[GET]** ``` /v1/:ref/config```
 
 Fetches the configuration for a specific reference
 
-Response:
+**Response:**
 ```
 {
     "status": "SUCCESS",
@@ -38,11 +38,11 @@ Response:
 ```
 
 ## PutConfig
-```PUT /v1/:ref/config```
+**[PUT]** ```/v1/:ref/config```
 
 Writes the configuration on runtime and generates the cache file
 
-Body (JSON):
+**Body (JSON):**
 ```
 {
     "zone": "nl",
@@ -59,7 +59,7 @@ Body (JSON):
 }
 ```
 
-Response (JSON):
+**Response (JSON):**
 ```
 {
     "status": "SUCCESS",
@@ -67,11 +67,11 @@ Response (JSON):
 ```
 
 ## GetHolidays
-```GET /v1/holidays/:zone```
+**[GET]** ```/v1/holidays/:zone```
 
 Fetches a list of holidays for a specific zone which can be added to the configuration
 
-Response (JSON):
+**Response (JSON):**
 ```
 {
     "status": "SUCCESS",
@@ -80,11 +80,11 @@ Response (JSON):
 ```
 
 ## IsWorkday
-```GET /v1/:ref/isWorkday/:date```
+**[GET]** ```/v1/:ref/isWorkday/:date```
 
 Checks if the given date is a workday
 
-Response (JSON):
+**Response (JSON):**
 ```
 {
     "status": "SUCCESS",
@@ -93,11 +93,11 @@ Response (JSON):
 ```
 
 ## AddWorkdays
-```GET /v1/:ref/addWorkdays/:date/:nrOfDays```
+**[GET]** ```/v1/:ref/addWorkdays/:date/:nrOfDays```
 
 Calculates the next workday based ont he given date and the number of days we should add
 
-Response (JSON):
+**Response (JSON):**
 ```
 {
     "status": "SUCCESS",
