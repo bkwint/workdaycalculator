@@ -1,8 +1,8 @@
 import fs from 'fs';
-import CacheInterface from './interfaces/CacheInterface.js';
-import IOBase from './IOBase.js';
 import path from 'path';
 import ConfigInterface from 'interfaces/ConfigInterface.js';
+import CacheInterface from './interfaces/CacheInterface.js';
+import IOBase from './IOBase.js';
 
 class DiskCache extends IOBase {
   constructor(baseDir: string = './.cache') {
@@ -39,7 +39,7 @@ class DiskCache extends IOBase {
 
     return fs.writeFileSync(jsonPath, JSON.stringify({
       config,
-      cache: body
+      cache: body,
     }, null, 2));
   }
 }

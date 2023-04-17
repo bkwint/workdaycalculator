@@ -4,6 +4,6 @@ interface ConfigInterface {
   numberOfYears: number
   exclude: string[],
   excludeHolidays: string[],
-};
+}
 
 export default ConfigInterface;

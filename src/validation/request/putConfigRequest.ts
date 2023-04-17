@@ -10,5 +10,5 @@ export default Joi.object<PutConfigValidationResultInterface>({
     numberOfYears: Joi.number().required(),
     exclude: Joi.array().items(Joi.date()).optional().default([]),
     excludeHolidays: Joi.array().items(Joi.string()).optional().default([]),
-  })
+  }),
 });

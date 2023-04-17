@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import flattenDeep from 'lodash/flattenDeep.js';
+import flattenDeep from 'lodash/flattenDeep';
 
 import ConfigInterface from 'interfaces/ConfigInterface';
 import CacheInterface from 'interfaces/CacheInterface';
@@ -31,9 +31,9 @@ const generate = (config: ConfigInterface): CacheInterface => {
 
     // determin the day and the string representation of the date
     if (
-      !holidays.includes(now.toISODate()) &&    // if is no holiday
-      config.workdays.includes(now.weekday) &&  // and it is a workday of the week
-      !config.exclude.includes(now.toISODate()) // and it is not a special excluded day
+      !holidays.includes(now.toISODate()) // if is no holiday
+      && config.workdays.includes(now.weekday) // and it is a workday of the week
+      && !config.exclude.includes(now.toISODate()) // and it is not a special excluded day
     ) {
       workdays.days.push(now.toISODate());
       i += 1;

@@ -5,7 +5,7 @@ import {
   validateGetConfigRequest,
   validatePutConfigRequest,
   validateAddWorkdaysRequest,
-  validateIsWorkdayRequest
+  validateIsWorkdayRequest,
 } from './validation/validators.js';
 
 // business logic classes
@@ -26,7 +26,6 @@ const cache = new DiskCache();
 const workdays = new Workdays(cache);
 const config = new Config(cache, workdays);
 
-
 // regenerates all the configs and puts then in memory
 // and on disk if the config has changed
 config.regenerateCache();
@@ -38,7 +37,7 @@ app.get('/v1/:ref/isWorkday/:date', async (req, res, next): Promise<void> => {
 
     res.json({
       status: 'SUCCESS',
-      result: workdays.isWorkday(ref, date)
+      result: workdays.isWorkday(ref, date),
     });
   } catch (e) {
     next(e);
@@ -51,7 +50,7 @@ app.get('/v1/:ref/addWorkdays/:date/:add', async (req, res, next): Promise<void>
 
     res.json({
       status: 'SUCCESS',
-      result: workdays.getWorkday(ref, date, add)
+      result: workdays.getWorkday(ref, date, add),
     });
   } catch (e) {
     next(e);
@@ -64,7 +63,7 @@ app.get('/v1/:ref/config', async (req, res, next): Promise<void> => {
 
     res.json({
       status: 'SUCCESS',
-      result: config.get(ref)
+      result: config.get(ref),
     });
   } catch (e) {
     next(e);
@@ -75,8 +74,8 @@ app.put('/v1/:ref/config', async (req, res, next): Promise<void> => {
   try {
     const { ref, body } = await validatePutConfigRequest({
       ref: req.params?.ref,
-      body: req.body
-    })
+      body: req.body,
+    });
 
     // write the body to the config file
     config.write(ref, body);
@@ -105,17 +104,19 @@ app.get('/v1/holidays/:zone', async (req, res, next): Promise<void> => {
 
     res.json({
       status: 'SUCCESS',
-      result: holidays
+      result: holidays,
     });
   } catch (e) {
     next(e);
   }
-})
+});
 
 // disabling this rule, next is needed or else the error handler will not be registered
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  // eslint-disable-next-line no-console
   console.error(err.stack);
+  // eslint-disable-next-line no-console
   console.log(err);
   res.status(500).json({
     success: false,
