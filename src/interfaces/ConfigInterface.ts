@@ -2,7 +2,8 @@ interface ConfigInterface {
   zone: string
   workdays: number[]
   numberOfYears: number
-  exclude: string[]
-}
+  exclude: string[],
+  excludeHolidays: string[],
+};
 
 export default ConfigInterface;
