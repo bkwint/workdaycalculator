@@ -4,7 +4,7 @@ import flattenDeep from 'lodash/flattenDeep';
 import ConfigInterface from 'interfaces/ConfigInterface';
 import CacheInterface from 'interfaces/CacheInterface';
 
-import getHolidays from './getHolidays.js';
+import getHolidays from './getHolidays';
 
 const generate = (config: ConfigInterface): CacheInterface => {
   let now = DateTime.now().startOf('day');
@@ -19,7 +19,7 @@ const generate = (config: ConfigInterface): CacheInterface => {
   const startYear = DateTime.now().year;
   const endYear = endDate.year;
   const holidaysPerYear = [];
-  for (let i = startYear; i < endYear; i += 1) {
+  for (let i = startYear; i <= endYear; i += 1) {
     holidaysPerYear.push(getHolidays(i, config.zone, config.excludeHolidays));
   }
 
