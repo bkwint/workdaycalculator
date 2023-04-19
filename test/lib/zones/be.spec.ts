@@ -14,6 +14,7 @@ const expectedDates = [
       '2021-05-24',
       '2021-07-21',
       '2021-08-15',
+      '2021-11-01',
       '2021-11-11',
       '2021-12-25',
     ],
@@ -28,6 +29,7 @@ const expectedDates = [
       '2022-06-06',
       '2022-07-21',
       '2022-08-15',
+      '2022-11-01',
       '2022-11-11',
       '2022-12-25',
     ],
@@ -42,6 +44,7 @@ const expectedDates = [
       '2023-05-29',
       '2023-07-21',
       '2023-08-15',
+      '2023-11-01',
       '2023-11-11',
       '2023-12-25',
     ],
@@ -56,6 +59,7 @@ const expectedDates = [
       '2024-05-20',
       '2024-07-21',
       '2024-08-15',
+      '2024-11-01',
       '2024-11-11',
       '2024-12-25',
     ],
@@ -70,13 +74,14 @@ const expectedDates = [
       '2025-06-09',
       '2025-07-21',
       '2025-08-15',
+      '2025-11-01',
       '2025-11-11',
       '2025-12-25',
     ],
   },
 ];
 
-describe('lib/zones/nl.ts', () => {
+describe('lib/zones/be.ts', () => {
   test.each(expectedDates)('year $year should be returned correctly', ({ year, expected }) => {
     const easterDate = DateTime.fromISO(easter(year).toString());
     const result = be(year, [], easterDate);

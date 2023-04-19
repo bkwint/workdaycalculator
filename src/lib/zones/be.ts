@@ -7,6 +7,7 @@ const OHHemelvaart = 'O.H. Hemelvaart';
 const pinkstermaandag = 'pinkstermaandag';
 const nationaleFeestdag = 'nationale feestdag';
 const OLVhemelvaart = 'O.L.V hemelvaart';
+const allerheiligen = 'allerheiligen';
 const wapenstilstand = 'wapenstilstand';
 const eersteKerstdag = 'eerste kerstdag';
 
@@ -31,6 +32,9 @@ const be = (year: number, excludeHolidays: string[], easterDate: DateTime) => [
     : undefined,
   !excludeHolidays.includes(OLVhemelvaart)
     ? `${year}-08-15`
+    : undefined,
+  !excludeHolidays.includes(allerheiligen)
+    ? `${year}-11-01`
     : undefined,
   !excludeHolidays.includes(wapenstilstand)
     ? `${year}-11-11`

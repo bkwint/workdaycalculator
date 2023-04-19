@@ -111,6 +111,13 @@ app.get('/v1/holidays/:zone', async (req, res, next): Promise<void> => {
   }
 });
 
+app.get('*', (req: Request, res: Response) => {
+  res.status(404).json({
+    status: 'FAILED',
+    error: 'invalid endpoint',
+  });
+});
+
 // disabling this rule, next is needed or else the error handler will not be registered
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -119,7 +126,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   // eslint-disable-next-line no-console
   console.log(err);
   res.status(500).json({
-    success: false,
+    status: 'FAILED',
     error: (() => {
       switch (err?.name) {
         case 'ValidationError':
