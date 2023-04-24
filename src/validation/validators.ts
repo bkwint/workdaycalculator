@@ -1,7 +1,7 @@
-import addWorkdaysRequest from './request/addWorkdaysRequest.js';
-import getConfigRequest from './request/getConfigRequest.js';
-import putConfigRequest from './request/putConfigRequest.js';
-import isWorkdayRequest from './request/isWorkdayRequest.js';
+import addWorkdaysRequest from './request/addWorkdaysRequest';
+import getConfigRequest from './request/getConfigRequest';
+import putConfigRequest from './request/putConfigRequest';
+import isWorkdayRequest from './request/isWorkdayRequest';
 
 const VALIDATOR_OPTIONS = {
   convert: true,

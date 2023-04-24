@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import DiskCache from './DiskCache.js';
+import DiskCache from './DiskCache';
 
 class Workdays {
   private configs:any;
@@ -45,7 +45,6 @@ class Workdays {
     this.lazyLoadConfig(ref);
 
     const dt = DateTime.fromJSDate(date).toFormat('yyyy-MM-dd');
-    // get the index
     const index = this.configs[this.getKey(ref)].dayToIndex[dt];
 
     return this.configs[this.getKey(ref)].days[index] === dt;

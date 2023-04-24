@@ -1,11 +1,11 @@
 import { DateTime } from 'luxon';
 // eslint-disable-next-line import/extensions
-import flattenDeep from 'lodash/flattenDeep.js';
+import flattenDeep from 'lodash/flattenDeep';
 
-import ConfigInterface from 'interfaces/ConfigInterface.js';
-import CacheInterface from 'interfaces/CacheInterface.js';
+import ConfigInterface from 'interfaces/ConfigInterface';
+import CacheInterface from 'interfaces/CacheInterface';
 
-import getHolidays from './getHolidays.js';
+import getHolidays from './getHolidays';
 
 const generate = (config: ConfigInterface): CacheInterface => {
   let now = DateTime.now().startOf('day');

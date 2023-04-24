@@ -1,6 +1,6 @@
 import Joi from 'joi';
-import ref from '../domain/ref.js';
-import PutConfigValidationResultInterface from '../../interfaces/validation/PutConfigValidationResultInterface.js';
+import ref from '../domain/ref';
+import PutConfigValidationResultInterface from '../../interfaces/validation/PutConfigValidationResultInterface';
 
 export default Joi.object<PutConfigValidationResultInterface>({
   ref,

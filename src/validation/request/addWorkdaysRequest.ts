@@ -1,6 +1,6 @@
 import Joi from 'joi';
-import ref from '../domain/ref.js';
-import AddWorkdaysValidationResultInterface from '../../interfaces/validation/AddWorkdaysValidationResultInterface.js';
+import ref from '../domain/ref';
+import AddWorkdaysValidationResultInterface from '../../interfaces/validation/AddWorkdaysValidationResultInterface';
 
 export default Joi.object<AddWorkdaysValidationResultInterface>({
   ref,

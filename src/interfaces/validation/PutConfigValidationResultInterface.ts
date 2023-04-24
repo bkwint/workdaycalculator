@@ -1,4 +1,4 @@
-import ConfigInterface from 'interfaces/ConfigInterface.js';
+import ConfigInterface from 'interfaces/ConfigInterface';
 
 interface PutConfigValidationResultInterface {
   ref: string,

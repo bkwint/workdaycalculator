@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import ConfigInterface from 'interfaces/ConfigInterface.js';
-import CacheInterface from './interfaces/CacheInterface.js';
-import IOBase from './IOBase.js';
-import CacheNotFoundError from './errors/CacheNotFoundError.js';
+import ConfigInterface from 'interfaces/ConfigInterface';
+import CacheInterface from './interfaces/CacheInterface';
+import IOBase from './IOBase';
+import CacheNotFoundError from './errors/CacheNotFoundError';
 import CacheFileInterface from './interfaces/CacheFileInterface';
 
 class DiskCache extends IOBase {
