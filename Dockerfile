@@ -1,18 +1,19 @@
-FROM node:18-alpine
+FROM node:18-alpine as build
 
 ADD . /usr/src/app
 
 WORKDIR /usr/src/app
 
-RUN npm ci \
-  && npm run build \
-  && rm Dockerfile \
-  && rm README.md \
-  && rm -rf ./src \
-  && rm tsconfig.json \
-  && rm webpack.config.js \
-  && mkdir .cache \ 
-  && mkdir .config
+RUN npm ci && npm run build
+
+FROM node:18-alpine
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+COPY --from=build /usr/src/app/dist ./dist
 
 EXPOSE 8181
 

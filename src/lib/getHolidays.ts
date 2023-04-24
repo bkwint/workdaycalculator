@@ -1,10 +1,10 @@
 import { easter } from 'date-easter';
 import { DateTime } from 'luxon';
 
-import nl from './zones/nl';
-import be from './zones/be';
+import nl from './zones/nl.js';
+import be from './zones/be.js';
 
-import ZoneNotFoundError from '../errors/ZoneNotFoundError';
+import ZoneNotFoundError from '../errors/ZoneNotFoundError.js';
 
 const getHolidays = (year: number, zone: string, excludeHolidays: string[]): string[] => {
   const easterDate = DateTime.fromISO(easter(year).toString());

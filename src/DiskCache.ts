@@ -3,30 +3,38 @@ import path from 'path';
 import ConfigInterface from 'interfaces/ConfigInterface.js';
 import CacheInterface from './interfaces/CacheInterface.js';
 import IOBase from './IOBase.js';
+import CacheNotFoundError from './errors/CacheNotFoundError.js';
+import CacheFileInterface from './interfaces/CacheFileInterface';
 
 class DiskCache extends IOBase {
   constructor(baseDir: string = './.cache') {
     super(baseDir);
   }
 
+  private getCacheFile(ref: string): CacheFileInterface {
+    try {
+      const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
+
+      // make sure we can only read from the given path
+      this.assertValidPath(jsonPath);
+
+      const json = JSON.parse(fs.readFileSync(jsonPath).toString());
+
+      return json;
+    } catch (e) {
+      console.error(e);
+      throw new CacheNotFoundError(`No cache found for ${ref}`);
+    }
+  }
+
   public get(ref: string): CacheInterface {
-    const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
-
-    // make sure we can only read from the given path
-    this.assertValidPath(jsonPath);
-
-    const json = JSON.parse(fs.readFileSync(jsonPath).toString());
+    const json = this.getCacheFile(ref);
 
     return json.cache;
   }
 
   public getConfig(ref: string): ConfigInterface {
-    const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
-
-    // make sure we can only read from the given path
-    this.assertValidPath(jsonPath);
-
-    const json = JSON.parse(fs.readFileSync(jsonPath).toString());
+    const json = this.getCacheFile(ref);
 
     return json.config;
   }
