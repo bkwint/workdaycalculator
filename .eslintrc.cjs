@@ -5,9 +5,7 @@ module.exports = {
   },
   ignorePatterns: [
     'coverage',
-    'coverage-backend',
-    'cypress',
-    'build'
+    'dist'
   ],
   rules: {
     "class-methods-use-this": "off",

@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 import getHolidays from '../../src/lib/getHolidays';
-import ZoneNotFoundError from "../../src/errors/ZoneNotFoundError";
+import ZoneNotFoundError from '../../src/errors/ZoneNotFoundError';
 
 const dutchDays = [
   '2025-01-01',

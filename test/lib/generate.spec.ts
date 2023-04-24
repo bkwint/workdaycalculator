@@ -1,4 +1,6 @@
-import { describe, it, expect, jest } from '@jest/globals';
+import {
+  describe, it, expect, jest,
+} from '@jest/globals';
 import { Settings } from 'luxon';
 import generate from '../../src/lib/generate';
 

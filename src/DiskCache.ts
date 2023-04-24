@@ -22,6 +22,7 @@ class DiskCache extends IOBase {
 
       return json;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
       throw new CacheNotFoundError(`No cache found for ${ref}`);
     }

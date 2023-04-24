@@ -41,6 +41,7 @@ app.get('*', (req: Request, res: Response) => {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if ((<ValidationError>err)?.isJoi || (<ClientError>err)?.isClient) {
+    // eslint-disable-next-line no-console
     console.info(`The following error occured: ${err.message}`);
     res.status(500).json({
       status: 'FAILED',
