@@ -252,7 +252,7 @@ describe('e2e', () => {
   describe('GET /v1/holidays/:zone', () => {
     test.each([
       { zone: 'nl', result: ['nieuwjaar', 'eerste paasdag', 'tweede paasdag', 'koningsdag', 'hemelvaartsdag', 'eerste pinksterdag', 'tweede pinksterdag', 'eerste kerstdag', 'tweede kerstdag', 'bevrijdingsdag'] },
-      { zone: 'be', result: ['nieuwjaarsdag', 'paasmaandag', 'dag van de arbeid', 'O.H. Hemelvaart', 'pinkstermaandag', 'nationale feestdag', 'O.L.V hemelvaart', 'wapenstilstand', 'eerste kerstdag'] },
+      { zone: 'be', result: ['nieuwjaarsdag', 'paasmaandag', 'dag van de arbeid', 'O.H. Hemelvaart', 'pinkstermaandag', 'nationale feestdag', 'O.L.V hemelvaart', 'allerheiligen', 'wapenstilstand', 'eerste kerstdag'] },
     ])('should return correct holidays for zone $zone', async ({ zone, result }: { zone: string, result: string[] }) => {
       const response = await request(app)
         .get(`/v1/holidays/${zone}`)

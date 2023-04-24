@@ -52,6 +52,7 @@ export const holidays = [
   pinkstermaandag,
   nationaleFeestdag,
   OLVhemelvaart,
+  allerheiligen,
   wapenstilstand,
   eersteKerstdag,
 ];
