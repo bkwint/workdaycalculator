@@ -17,6 +17,19 @@ const registerRoutes = (app: Express, workdays: Workdays, config: Config) => {
    * /v1/:ref/isWorkday/:date:
    *   get:
    *     description: returns if the given date is a workday or not
+   *     parameters:
+   *        - in: path
+   *          name: :ref
+   *          schema:
+   *              type: string
+   *          required: true
+   *          description: ref of the config
+   *        - in: path
+   *          name: :date
+   *          schema:
+   *              type: string
+   *          required: true
+   *          description: date to check
    *     responses:
    *       200:
    *         content:
@@ -50,6 +63,25 @@ const registerRoutes = (app: Express, workdays: Workdays, config: Config) => {
    * /v1/:ref/addWorkdays/:date/:add:
    *   get:
    *     description: returns the date after the given number of workdays have passed
+   *     parameters:
+   *        - in: path
+   *          name: :ref
+   *          schema:
+   *              type: string
+   *          required: true
+   *          description: ref of the config
+   *        - in: path
+   *          name: :date
+   *          schema:
+   *              type: string
+   *          required: true
+   *          description: date to start from
+   *        - in: path
+   *          name: :add
+   *          schema:
+   *              type: number
+   *          required: true
+   *          description: amount of days to add
    *     responses:
    *       200:
    *         content:
@@ -84,6 +116,13 @@ const registerRoutes = (app: Express, workdays: Workdays, config: Config) => {
    * /v1/:ref/config:
    *   get:
    *       description: returns the config for the given ref
+   *       parameters:
+   *          - in: path
+   *            name: :ref
+   *            schema:
+   *                type: string
+   *            required: true
+   *            description: ref of the config
    *       responses:
    *         200:
    *           content:
@@ -142,8 +181,14 @@ const registerRoutes = (app: Express, workdays: Workdays, config: Config) => {
    * /v1/:ref/config:
    *   put:
    *     description: update the config for the given ref
+   *     parameters:
+   *        - in: path
+   *          name: :ref
+   *          schema:
+   *              type: string
+   *          required: true
+   *          description: ref of the config
    *     requestBody:
-   *       description: Optional description in *Markdown*
    *       required: true
    *       content:
    *         application/json:
@@ -208,6 +253,13 @@ const registerRoutes = (app: Express, workdays: Workdays, config: Config) => {
    * /v1/holidays/:zone:
    *   get:
    *       description: returns a list of holidays for a given zone
+   *       parameters:
+   *          - in: path
+   *            name: :zone
+   *            schema:
+   *                type: string
+   *            required: true
+   *            description: zone to get the holidays from
    *       responses:
    *         200:
    *           content:

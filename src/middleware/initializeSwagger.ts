@@ -11,7 +11,7 @@ const initializeSwagger = (app: Express) => {
         version: '1.0.0',
       },
     },
-    apis: ['./src/registerRoutes.ts'], // files containing annotations as above
+    apis: ['./src/middleware/registerRoutes.ts'], // files containing annotations as above
   });
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };
