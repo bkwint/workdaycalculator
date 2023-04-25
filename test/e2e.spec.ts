@@ -6,11 +6,12 @@ import request from 'supertest';
 import { Settings } from 'luxon';
 import Workdays from '../src/Workdays';
 import DiskCache from '../src/DiskCache';
-import registerRoutes from '../src/registerRoutes';
+import registerRoutes from '../src/middleware/registerRoutes';
 import Config from '../src/Config';
 import ConfigInterface from '../src/interfaces/ConfigInterface';
 import generate from '../src/lib/generate';
-import handleFailures from '../src/handleFailures';
+import handleFailures from '../src/middleware/handleFailures';
+import ConfigNotFoundError from '../src/errors/ConfigNotFoundError';
 
 const configsToTestWith: { [key: string]: ConfigInterface } = {
   nl: {
@@ -196,12 +197,31 @@ describe('e2e', () => {
 
   describe('GET /v1/:ref/addWorkdays/:date/:add', () => {
     test.each([
-      { date: '2020-01-02', add: 10, expected: '2020-01-15' },
-      { date: '2020-12-24', add: 10, expected: '2021-01-08' },
-      { date: '2020-12-30', add: 10, expected: '2021-01-13' },
-    ])('should return $expected after adding $add days to $date', async ({ date, add, expected }: { date: string, add: number, expected: string }) => {
+      {
+        // 4/5/11/12 weekend
+        date: '2020-01-02', add: 10, expected: '2020-01-16', ref: 'nl',
+      },
+      {
+        // 25 kerst, 26/27/2/3/9/10 weekend
+        date: '2020-12-24', add: 10, expected: '2021-01-11', ref: 'nl',
+      },
+      {
+        // 01-01 nieuwjaar, 2/3/9/10 weekend
+        date: '2020-12-30', add: 10, expected: '2021-01-14', ref: 'nl',
+      },
+      {
+        // 27 is koningsdag in nl
+        date: '2021-04-26', add: 1, expected: '2021-04-28', ref: 'nl',
+      },
+      {
+        // no koningsdag in be
+        date: '2021-04-26', add: 1, expected: '2021-04-27', ref: 'be',
+      },
+    ])('should return $expected after adding $add days to $date', async ({
+      date, add, expected, ref,
+    }: { date: string, add: number, expected: string, ref: string }) => {
       const response = await request(app)
-        .get(`/v1/nl/addWorkdays/${date}/${add}`)
+        .get(`/v1/${ref}/addWorkdays/${date}/${add}`)
         .send();
 
       expect(response.body.status).toEqual('SUCCESS');
@@ -224,7 +244,7 @@ describe('e2e', () => {
 
     it('should handle invalid ref', async () => {
       configReadMock.mockImplementation(() => {
-        throw new Error();
+        throw new ConfigNotFoundError('The config for ref xyz could not be found');
       });
 
       const response = await request(app)
@@ -232,6 +252,7 @@ describe('e2e', () => {
         .send();
 
       expect(response.body.status).toEqual('FAILED');
+      expect(response.body.error).toEqual('The config for ref xyz could not be found');
     });
   });
 

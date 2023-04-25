@@ -6,8 +6,10 @@
     "start": "node dist/app.js",
     "start:local": "nodemon src/app.ts",
     "test": "jest",
+    "lint": "eslint",
     "typecheck": "tsc --project tsconfig.json --noEmit",
-    "build": "tsc --project tsconfig-build.json"
+    "build": "tsc --project tsconfig-build.json",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -36,6 +38,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",
+    "husky": "^8.0.3",
     "jest": "^29.4.3",
     "jest-runner-tsc": "^1.6.0",
     "nodemon": "^2.0.20",

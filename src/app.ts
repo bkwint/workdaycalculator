@@ -5,9 +5,9 @@ import Workdays from './Workdays';
 import DiskCache from './DiskCache';
 import Config from './Config';
 
-import registerRoutes from './registerRoutes';
-import initializeSwagger from './initializeSwagger';
-import handleFailures from './handleFailures';
+import registerRoutes from './middleware/registerRoutes';
+import initializeSwagger from './middleware/initializeSwagger';
+import handleFailures from './middleware/handleFailures';
 
 // create the express application
 const app = express();

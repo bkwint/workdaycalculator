@@ -65,7 +65,7 @@ class Workdays {
     // get the index
     const index = this.configs[this.getKey(ref)].dayToIndex[DateTime.fromJSDate(date).toFormat('yyyy-MM-dd')];
 
-    return this.configs[this.getKey(ref)].days[index + workdaysToAdd - 1];
+    return this.configs[this.getKey(ref)].days[index + workdaysToAdd];
   }
 
   /**

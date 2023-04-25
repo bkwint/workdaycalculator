@@ -2,7 +2,7 @@ import {
   Express, NextFunction, Request, Response,
 } from 'express';
 import { ValidationError } from 'joi';
-import ClientError from './errors/ClientError';
+import ClientError from '../errors/ClientError';
 
 const handleFailures = (app: Express) => {
   app.get('*', (req: Request, res: Response) => {

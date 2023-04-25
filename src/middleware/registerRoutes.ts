@@ -4,12 +4,12 @@ import {
   validateGetConfigRequest,
   validateIsWorkdayRequest,
   validatePutConfigRequest,
-} from './validation/validators';
-import { holidays as nl } from './lib/zones/nl';
-import { holidays as be } from './lib/zones/be';
-import ZoneNotFoundError from './errors/ZoneNotFoundError';
-import Workdays from './Workdays';
-import Config from './Config';
+} from '../validation/validators';
+import { holidays as nl } from '../lib/zones/nl';
+import { holidays as be } from '../lib/zones/be';
+import ZoneNotFoundError from '../errors/ZoneNotFoundError';
+import Workdays from '../Workdays';
+import Config from '../Config';
 
 const registerRoutes = (app: Express, workdays: Workdays, config: Config) => {
   /**

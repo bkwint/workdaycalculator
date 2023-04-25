@@ -6,6 +6,7 @@ import Workdays from './Workdays';
 import generate from './lib/generate';
 import ConfigInterface from './interfaces/ConfigInterface';
 import IOBase from './IOBase';
+import ConfigNotFoundError from './errors/ConfigNotFoundError';
 
 class Config extends IOBase {
   private workdays: Workdays;
@@ -19,12 +20,16 @@ class Config extends IOBase {
   }
 
   public get(ref: string): ConfigInterface {
-    const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
+    try {
+      const jsonPath = path.resolve(this.baseDir, `${ref}.json`);
 
-    // make sure we can only read from the given path
-    this.assertValidPath(jsonPath);
+      // make sure we can only read from the given path
+      this.assertValidPath(jsonPath);
 
-    return JSON.parse(fs.readFileSync(jsonPath).toString());
+      return JSON.parse(fs.readFileSync(jsonPath).toString());
+    } catch (e) {
+      throw new ConfigNotFoundError(`The config for ref ${ref} could not be found`);
+    }
   }
 
   public write(ref: string, config: ConfigInterface): void {
