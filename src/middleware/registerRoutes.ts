@@ -113,14 +113,16 @@ const registerRoutes = (app: Express, workdays: Workdays, config: Config) => {
    *                           type: number
    *                       exclude:
    *                         type: array
-   *                         description: the holidays to exclude
+   *                         description: the extra days to exclude
    *                         items:
    *                           type: string
+   *                           example: 2022-02-02
    *                       excludeHolidays:
    *                         type: array
-   *                         description: the holidays to exclude
+   *                         description: holidays that are not applicable for this configuration
    *                         items:
    *                           type: string
+   *                           example: koningsdag
    */
   app.get('/v1/:ref/config', async (req, res, next): Promise<void> => {
     try {
@@ -163,12 +165,12 @@ const registerRoutes = (app: Express, workdays: Workdays, config: Config) => {
    *                       type: number
    *                   exclude:
    *                     type: array
-   *                     description: the holidays to exclude
+   *                     description: the extra days to exclude
    *                     items:
    *                       type: string
    *                   excludeHolidays:
    *                     type: array
-   *                     description: the holidays to exclude
+   *                     description: holidays that are not applicable for this configuration
    *                     items:
    *                       type: string
    *     responses:
